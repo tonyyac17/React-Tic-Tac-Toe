@@ -116,6 +116,14 @@ export default function Game() {
       </div>
       <div className="game-info">
         <ol>{moves}</ol>
+        <button
+          onClick={() => {
+            setHistory([Array(9).fill(null)]);
+            setCurrentMove(0);
+          }}
+        >
+          Reset Game
+        </button>
       </div>
     </div>
   );
