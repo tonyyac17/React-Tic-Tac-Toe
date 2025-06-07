@@ -31,11 +31,12 @@ function Board({ squares, xIsNext, onPlay }) {
   }
   return (
     <>
-      {winner ? (
+      {/* {winner ? (
         <p>Winner is: {winner}</p>
       ) : (
         <p>Next Player: {xIsNext ? "X" : "O"}</p>
-      )}
+      )} */}
+      <div className="status">{status}</div>
 
       <div className="board-row">
         <Square value={squares[0]} onClick={() => onSquareClick(0)} />
