@@ -20,7 +20,15 @@ function Board({ squares, xIsNext, onPlay }) {
     onPlay(newSquares);
   }
   const winner = calculateWinner(squares);
-
+  const isBoardFull = squares.every(Boolean);
+  let status;
+  if (winner) {
+    status = "Winner: " + winner;
+  } else if (isBoardFull) {
+    status = "Cats game!";
+  } else {
+    status = "Next player: " + (xIsNext ? "X" : "O");
+  }
   return (
     <>
       {winner ? (
