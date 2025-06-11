@@ -12,7 +12,7 @@ function Square({ value, onClick }) {
   );
 }
 
-function Board({ squares, xIsNext, onPlay }) {
+function Board({ squares, xIsNext, onPlay, playerX, playerO }) {
   function onSquareClick(idx) {
     if (squares[idx] || calculateWinner(squares)) return;
     const newSquares = squares.slice();
@@ -21,13 +21,15 @@ function Board({ squares, xIsNext, onPlay }) {
   }
   const winner = calculateWinner(squares);
   const isBoardFull = squares.every(Boolean);
+  const currentPlayerName = xIsNext ? playerX || "X" : playerO || "O";
   let status;
   if (winner) {
-    status = "Winner: " + winner;
+    const winningName = winner === "X" ? playerX || "X" : playerO || "O";
+    status = "Winner: " + winningName;
   } else if (isBoardFull) {
     status = "Cats game!";
   } else {
-    status = "Next player: " + (xIsNext ? "X" : "O");
+    status = "Next player: " + currentPlayerName;
   }
   return (
     <>
@@ -81,6 +83,8 @@ function calculateWinner(squares) {
 export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [currentMove, setCurrentMove] = useState(0);
+  const [playerX, setPlayerX] = useState("");
+  const [playerO, setPlayerO] = useState("");
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
@@ -111,8 +115,33 @@ export default function Game() {
   return (
     <div className="game">
       <h1>Testing auto deployment</h1>
+      <div>
+        <label>
+          Player X:{" "}
+          <input
+            type="text"
+            value={playerX}
+            onChange={(e) => setPlayerX(e.target.value)}
+          />
+        </label>
+        <br />
+        <label>
+          Player O:{" "}
+          <input
+            type="text"
+            value={playerO}
+            onChange={(e) => setPlayerO(e.target.value)}
+          />
+        </label>
+      </div>
       <div className="game-board">
-        <Board squares={currentSquares} xIsNext={xIsNext} onPlay={handlePlay} />
+        <Board
+          squares={currentSquares}
+          xIsNext={xIsNext}
+          onPlay={handlePlay}
+          playerX={playerX}
+          playerO={playerO}
+        />
       </div>
       <div className="game-info">
         <ol>{moves}</ol>
