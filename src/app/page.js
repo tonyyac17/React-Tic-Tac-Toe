@@ -121,6 +121,7 @@ export default function Game() {
           <input
             type="text"
             value={playerX}
+            placeholder="Enter Name"
             onChange={(e) => setPlayerX(e.target.value)}
           />
         </label>
@@ -130,6 +131,7 @@ export default function Game() {
           <input
             type="text"
             value={playerO}
+            placeholder="Enter Name"
             onChange={(e) => setPlayerO(e.target.value)}
           />
         </label>
